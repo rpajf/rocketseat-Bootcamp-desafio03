@@ -46,6 +46,10 @@ class UserController {
         password ? field.required().oneOf([Yup.ref('password')]) : field
       ),
     });
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+    
     const { email, oldPassword } = req.body;
 
     const user = await User.findByPk(req.userId);
