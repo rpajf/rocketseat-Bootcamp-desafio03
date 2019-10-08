@@ -27,8 +27,9 @@ class SubscriptionController {
 
     return res.json(subscriptions);
   }
+
   async store(req, res) {
-    const meetup = await Meetup.findAll(req.params.id)
+    const meetup = await Meetup.findByPk(req.params.meetupId)
 
 
     if (meetup.user_id === req.userId) {
